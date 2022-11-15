@@ -1,0 +1,92 @@
+{
+  "interface" : {
+    "host" : "http://localhost",
+    "port" : 3003
+  },
+  "instances" : {
+    "goods" : {
+      "users" : {
+        "site" : {
+          "read" : true,
+          "write" : false
+        },
+        "server" : {
+          "read" : true,
+          "write" : true
+        }
+      },
+      "request" : {
+        "suggest" : {
+          "sources" : {
+            "goods" : {
+              "source" : "fields.full_name",
+              "collect" : "element",
+              "agg" : {
+                "limit" : 2,
+                "sources" : ["params.Раздел элемента", "params.Тип Товара"]
+              }
+            },
+            "brands" : {
+              "collect" : "params",
+              "filter" : {
+                "external_id" : "Бренд"
+              }
+            },
+            "sections" : {
+              "collect" : "params",
+              "filter" : {
+                "external_id" : "Раздел элемента"
+              }
+            },
+            "popular" : {
+              "collect" : "words"
+            },
+            "agg" : {
+              "source" :  "goods",
+              "collect" : "agg"
+            }
+          }
+        },
+        "search" : {
+          "sources" : {
+            "goods" : {
+              "source" : "fields.full_name",
+              "collect" : "element",
+              "agg" : {
+                "params.*" : "terms"
+              }
+            },
+            "agg" : {
+              "source" :  "goods",
+              "collect" : "agg"
+            }
+          }
+        }
+      }
+    }
+  },
+  "users" : {
+    "site" : {
+      "password" : "SAlk;23x0123!Z@,sxcS",
+      "access" : {
+        "request_params" : {
+          "*" : {
+            "sources" : {
+              "*" : {
+                "limit" : true,
+                "boost" : true,
+                "filter" : true,
+                "fields" : true
+              }
+            }
+          },
+          "page" : true
+        }
+      }
+    },
+    "server" : {
+      "password" : "SAlk;23x0123!Z@,sxcS",
+      "access" : {}
+    }
+  }
+}
