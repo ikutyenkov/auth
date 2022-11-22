@@ -2,7 +2,7 @@ const Interface = require("../class/interface.js");
 const config = require("../config.json");
 const Users = require("../collects/users.js");
 
-class Auth
+class Handler
 {
     constructor() {
         Interface.getInstance().awaitSubscribe('login', this.login.bind(this));
@@ -32,4 +32,4 @@ class Auth
     }
 }
 
-module.exports = new Auth();
+module.exports = new Handler();

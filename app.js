@@ -1,10 +1,18 @@
+const config = require("./config.json");
+
 class App
 {
     constructor()
     {
-        this.handlers = {
-            "auth" : require("./handlers/auth.js"),
-            "hash" : require("./handlers/hash.js")
+        this.handlers = {};
+
+        for (let i = 0; i < (config.handlers ?? []).length; i++) {
+
+            try {
+                this.handlers[config.handlers[i]] = require("./handlers/" + config.handlers[i] + ".js");
+            } catch (e) {
+                console.log(e);
+            }
         }
     }
 }

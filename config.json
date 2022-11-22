@@ -1,8 +1,6 @@
 {
-  "interface" : {
-    "host" : "http://localhost",
-    "port" : 3003
-  },
+  "interface" : {},
+  "handlers" : ["auth", "instances"],
   "instances" : {
     "goods" : {
       "users" : {
@@ -11,6 +9,10 @@
           "write" : false
         },
         "server" : {
+          "read" : true,
+          "write" : true
+        },
+        "update" : {
           "read" : true,
           "write" : true
         }
@@ -85,6 +87,10 @@
       }
     },
     "server" : {
+      "password" : "SAlk;23x0123!Z@,sxcS",
+      "access" : {}
+    },
+    "update" : {
       "password" : "SAlk;23x0123!Z@,sxcS",
       "access" : {}
     }
